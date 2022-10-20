@@ -1,0 +1,109 @@
+# 1. Задайте список из нескольких чисел. Напишите программу, которая найдёт сумму элементов списка, стоящих на нечётной позиции.
+# Пример:    
+# [2, 3, 5, 9, 3] -> на нечётных позициях элементы 3 и 9, ответ: 12
+
+# my_list = [2, 3, 5, 9, 3]
+# sum = 0
+# for i in range(1, len(my_list), 2):
+#     sum += (my_list[i])
+# print(sum)
+
+
+# 2. Напишите программу, которая найдёт произведение пар чисел списка. Парой считаем первый и последний элемент, второй и предпоследний и т.д.
+# Пример:
+# [2, 3, 4, 5, 6] => [12, 15, 16];
+# [2, 3, 5, 6] => [12, 15]
+
+
+# Вариант1
+# my_list = [2, 3, 4, 5, 6]
+# new_list = []
+
+# while len(my_list) > 1 :
+#     res = (my_list[0]) * (my_list[-1])
+#     new_list.append(res)
+#     my_list.pop(0)
+#     my_list.pop(-1)
+# if len(my_list) > 0:
+#     new_list.append(my_list[0] **2 )
+# print(new_list)
+
+# Вариант2
+# for i in range(int(len(my_list) / 2 + 0.5)):
+#     res = (my_list[i]) * (my_list[-(i+1)])
+#     new_list.append(res)
+# print(new_list)
+
+
+# 3. Задайте список из вещественных чисел. Напишите программу, которая найдёт разницу между максимальным и минимальным значением дробной части элементов.
+# Пример:
+# [1.1, 1.2, 3.1, 5, 10.01, 12.00] => 0.19
+# Примечание:
+
+# Обратите внимание на элемент 5 и и 12.0. Они не участвуют в процессе т.к. дробная часть ноль.
+# В списке могут быть как числа float, так и числа int.
+# Посмотрите на методы числа float, возможно пригодятся.
+
+
+# new_lst = [1.1, 1.2, 3.1, 5, 10.01, 12.00]
+# shot_lst = []
+# for el in new_lst:
+#     diff = round(el - int(el), 2)
+#     if diff > 0:
+#         shot_lst.append(diff)
+# high = round(max(shot_lst), 2)
+# low = round(min(shot_lst), 2)
+# print(f'нисходый список => {new_lst}')
+# print(f'MAX = {high}, MIN = {low} -> {round((high - low), 2)}')
+
+
+# 4. Напишите программу, которая будет преобразовывать десятичное число в двоичное.
+# Пример:
+# 45 -> '101101'
+# 3 -> '11'
+# 2 -> '10'
+# Примечание: Результат вернуть в виде строки. Не использовать функции преобразования типов: bin
+
+
+# def inp_check(numb):
+#     while not numb.isdigit():
+#         print('ошибка ввода!')
+#         numb = input('-> повторный ввод числа: ')
+#     return numb
+
+# unum = int(inp_check(input('ввод числа: ')))
+# line = ''
+# while unum >= 1:
+#     line = line + str(unum % 2)
+#     unum = int(unum / 2)
+# print(f'{line[::-1]} -> {type(line)}')
+# # 5. Задайте число. Составьте список чисел Фибоначчи, в том числе для отрицательных индексов.
+# # Пример:
+# # - для k = 8 список будет выглядеть так: [-21 ,13, -8, 5, −3, 2, −1, 1, 0, 1, 1, 2, 3, 5, 8, 13, 21]
+# # Примечание:
+
+
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return (fibonacci(n-1) + fibonacci(n-2))
+
+
+def fibonacci_back(n):
+    if n <= 1:
+        return n
+    else:
+        return (fibonacci_back(n-2) - fibonacci_back(n-1))
+
+n = int(input('Введите число: '))
+
+fibo_series = []
+
+for i in range(0, n):
+    fibo_series.append(fibonacci(i))
+
+for i in range(1, n):
+    fibo_series.insert(0,fibonacci_back(i))
+
+print(fibo_series)
